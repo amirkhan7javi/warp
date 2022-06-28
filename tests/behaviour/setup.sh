@@ -60,7 +60,7 @@ EOM
 $isoltest/7/isoltest --print-test-expectations \
   --testpath $dir/7/solidity/test/libsolidity/semanticTests/ \
   >> $dir/test_calldata.ts
-cat > $dir/test_calldata.ts <<- EOM
+cat >> $dir/test_calldata.ts <<- EOM
 const testsV8 : {[file: string]: ITestCalldata[] | null} =
 EOM
 $isoltest/8/isoltest --print-test-expectations \
