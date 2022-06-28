@@ -1,9 +1,6 @@
 import { ITestCalldata } from './expectations/semantic';
 
 const tests : {[file: string]: ITestCalldata[] | null} =
-Unable to find libevmone.dylib. Please provide the path using --vm <path>.
-You can download it at
-https://github.com/ethereum/evmone/releases/download/v0.4.1/evmone-0.4.1-darwin-x86_64.tar.gz
 {
 	"tests/behaviour/7/solidity/test/libsolidity/semanticTests/abiEncoderV1/abi_decode_dynamic_array.sol" : 
 	[
