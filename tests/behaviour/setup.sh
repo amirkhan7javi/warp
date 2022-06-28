@@ -55,14 +55,18 @@ esac
 cat > $dir/test_calldata.ts <<- EOM
 import { ITestCalldata } from './expectations/semantic';
 
-const tests : {[file: string]: ITestCalldata[] | null} =
+const testsV7 : {[file: string]: ITestCalldata[] | null} =
 EOM
 $isoltest/7/isoltest --print-test-expectations \
   --testpath $dir/7/solidity/test/libsolidity/semanticTests/ \
   >> $dir/test_calldata.ts
+cat > $dir/test_calldata.ts <<- EOM
+const testsV8 : {[file: string]: ITestCalldata[] | null} =
+EOM
 $isoltest/8/isoltest --print-test-expectations \
   --testpath $dir/8/solidity/test/libsolidity/semanticTests/ \
   >> $dir/test_calldata.ts
 cat >> $dir/test_calldata.ts <<- EOM
+const tests = {...testsV7, ...testsV8 };
 export default tests;
 EOM
