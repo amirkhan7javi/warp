@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
-import './tests/behaviour/contracts/ERC20/ERC20.sol';
+import '../tests/behaviour/contracts/ERC20/ERC20.sol';
 contract MultiSigWallet is WARP {
   // Events
   event Deposit(address sender, uint256 amount);
