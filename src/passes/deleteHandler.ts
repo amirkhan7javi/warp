@@ -1,3 +1,4 @@
+import { assert } from 'console';
 import {
   Assignment,
   DataLocation,
@@ -14,6 +15,7 @@ import { AST } from '../ast/ast';
 import { ASTMapper } from '../ast/mapper';
 import { cloneDocumentation } from '../utils/cloning';
 import { getDefaultValue } from '../utils/defaultValueNodes';
+import { WillNotSupportError } from '../utils/errors';
 
 export class DeleteHandler extends ASTMapper {
   visitUnaryOperation(node: UnaryOperation, ast: AST): void {
@@ -32,6 +34,16 @@ export class DeleteHandler extends ASTMapper {
       return;
     }
 
+    // The delete operation is expected to be the outermost expression of the line of
+    // code. Since delete does not return a value, it should not be replaced by an
+    // assignment (which does return a value), unless it satisfies the above property.
+    const parent = node.getClosestParentByType(ExpressionStatement);
+    if (parent === undefined || parent.vExpression !== node)
+      throw new WillNotSupportError(
+        'Delete operations have to be the outermost expression to be supported',
+      );
+
+    // Replace deletion statement with the corresponding assignment
     const newNode = getDefaultValue(nodeType, node, ast);
     ast.replaceNode(
       node,
