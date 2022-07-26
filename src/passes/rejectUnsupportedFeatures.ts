@@ -4,6 +4,7 @@ import {
   ArrayTypeName,
   ASTNode,
   BytesType,
+  Conditional,
   ContractDefinition,
   ContractKind,
   DataLocation,
@@ -28,6 +29,7 @@ import {
   RevertStatement,
   StructDefinition,
   TryStatement,
+  TupleType,
   TypeNode,
   UserDefinedType,
   VariableDeclaration,
@@ -57,6 +59,15 @@ export class RejectUnsupportedFeatures extends ASTMapper {
   }
   visitErrorDefinition(node: ErrorDefinition, _ast: AST): void {
     throw new WillNotSupportError('User defined Errors are not supported', node);
+  }
+  visitConditional(node: Conditional, ast: AST): void {
+    const conditionalType = getNodeType(node, ast.compilerVersion);
+    if (conditionalType instanceof TupleType && conditionalType.elements.length > 0) {
+      throw new WillNotSupportError(
+        'Tuple type as the return value of a conditional is not supported',
+        node,
+      );
+    }
   }
   visitFunctionCallOptions(node: FunctionCallOptions, _ast: AST): void {
     throw new WillNotSupportError(

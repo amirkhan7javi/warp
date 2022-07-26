@@ -58,6 +58,7 @@ const expectedResults = new Map<string, ResultType>(
     ['example_contracts/calldatasize', 'WillNotSupport'],
     ['example_contracts/comments', 'Success'],
     ['example_contracts/conditional_delete', 'WillNotSupport'],
+    ['example_contracts/conditional_tuple', 'WillNotSupport'],
     ['example_contracts/conditional', 'Success'],
     ['example_contracts/constructors_dyn', 'Success'],
     ['example_contracts/constructors_nonDyn', 'Success'],
