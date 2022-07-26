@@ -14,7 +14,7 @@ contract WARP {
   }
 
   function voidReturn() public {
-    return (x == 0) ? f() : g();
+    return (x == 0) ? g() : (x < 10) ? f() : h();
   }
 
   function f() public {
@@ -23,5 +23,9 @@ contract WARP {
 
   function g() public {
     x = 5;
+  }
+
+  function h() public {
+    x = 20;
   }
 }

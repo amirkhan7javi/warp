@@ -358,7 +358,11 @@ export const expectations = flatten(
             Expect.Simple('simpleScalar', ['0', '2', '6'], ['6']),
             Expect.Simple('x', [], ['0', '0']),
             Expect.Simple('voidReturn', [], []),
+            Expect.Simple('x', [], ['5', '0']),
+            Expect.Simple('voidReturn', [], []),
             Expect.Simple('x', [], ['10', '0']),
+            Expect.Simple('voidReturn', [], []),
+            Expect.Simple('x', [], ['20', '0']),
           ]),
           new File(
             'nested_and_or',
